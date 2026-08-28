@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrato Consolidado de Arrendamiento - Editor Interactivo & Exportador PDF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- HTML2PDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Fixed Action Bar (Hidden on Print) -->
+  <header class="app-toolbar no-print">
+    <div class="toolbar-brand">
+      <span class="icon">📜</span>
+      <div>
+        <h1>Editor de Contrato de Arrendamiento</h1>
+        <p>Milwaukee (Cliente) & Ernesto Mendoza (Proveedor)</p>
+      </div>
+    </div>
+    
+    <div class="toolbar-summary">
+      <div class="summary-badge">
+        <span class="label">Equipos:</span>
+        <strong id="badge-total-equipos">83</strong>
+      </div>
+      <div class="summary-badge">
+        <span class="label">Subtotal Mensual:</span>
+        <strong id="badge-subtotal">$83,647.24 USD</strong>
+      </div>
+      <div class="summary-badge highlight">
+        <span class="label">Total c/ IVA:</span>
+        <strong id="badge-total">$97,030.80 USD</strong>
+      </div>
+    </div>
+
+    <div class="toolbar-actions">
+      <button id="btn-add-equipment" class="btn btn-secondary">
+        <span>➕</span> Agregar Equipo
+      </button>
+      <button id="btn-toggle-edit" class="btn btn-secondary active">
+        <span id="edit-icon">✏️</span> <span id="edit-text">Modo Edición Activo</span>
+      </button>
+      <button id="btn-reset" class="btn btn-outline" title="Restablecer valores originales">
+        <span>🔄</span> Restablecer
+      </button>
+      <button id="btn-print-pdf" class="btn btn-primary">
+        <span>📄</span> Descargar en PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- Document Canvas -->
+  <main class="document-container">
+    <article id="contract-document" class="legal-document">
+      
+      <!-- Document Header -->
+      <div class="doc-title-block">
+        <h2>CONTRATO CONSOLIDADO DE ARRENDAMIENTO Y PRESTACIÓN DE SERVICIOS ESPECIALIZADOS DE RENTA Y MANTENIMIENTO INTEGRAL DE MONTACARGAS Y EQUIPOS DE MANEJO DE MATERIALES</h2>
+        <p class="subtitle">DOCUMENTO LEGAL MODIFICABLE Y VALIDADO</p>
+      </div>
+
+      <div class="doc-preamble">
+        <p>
+          CONTRATO CONSOLIDADO DE ARRENDAMIENTO Y PRESTACIÓN DE SERVICIOS ESPECIALIZADOS QUE CELEBRAN, POR UNA PARTE, 
+          <span class="editable-inline" contenteditable="true" data-field="cliente_nombre">TECHTRONIC INDUSTRIES CO. MÉXICO S. DE R.L. DE C.V.</span> 
+          (EN LO SUCESIVO DENOMINADA INDISTINTAMENTE COMO <strong>"MILWAUKEE"</strong> O EL <strong>"CLIENTE"</strong> O LA <strong>"ARRENDATARIA"</strong>), 
+          REPRESENTADA EN ESTE ACTO POR <span class="editable-inline" contenteditable="true" data-field="cliente_rep">SR. JOSÉ FERNANDO KANTÚN NAVA Y/O SRA. BLANCA ALICIA GARZA ELIZONDO</span>; 
+          Y POR LA OTRA PARTE, EL <span class="editable-inline" contenteditable="true" data-field="prov_nombre">SR. ERNESTO ALBERTO MENDOZA LÓPEZ</span>, 
+          POR SU PROPIO DERECHO (PERSONA FÍSICA CON ACTIVIDADES EMPRESARIALES Y PROFESIONALES, EN LO SUCESIVO DENOMINADO COMO EL <strong>"PRESTADOR"</strong> O EL <strong>"ARRENDADOR"</strong>); 
+          A QUIENES CONJUNTAMENTE SE LES DENOMINARÁ COMO <strong>"LAS PARTES"</strong>, AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
+        </p>
+      </div>
+
+      <!-- Declaraciones Section -->
+      <section class="doc-section">
+        <h3 class="section-heading">DECLARACIONES</h3>
+        
+        <div class="declaration-block">
+          <h4>I. Declara EL CLIENTE / LA ARRENDATARIA, a través de su(s) representante(s) legal(es):</h4>
+          <ol type="a">
+            <li>
+              Que es una sociedad constituida conforme a las leyes mexicanas, según consta en la Escritura Pública No. 
+              <span class="editable-inline" contenteditable="true" data-field="cliente_escritura_1">126,979</span> de fecha 25 de junio de 2019 (Notario 64 CDMX) y Escritura Pública No. 
+              <span class="editable-inline" contenteditable="true" data-field="cliente_escritura_2">32,148</span> de fecha 15 de enero de 1981 (Notario 47 Monterrey, N.L.).
+            </li>
+            <li>
+              Que su(s) representante(s) legal(es) cuenta(n) con facultades suficientes según Escrituras Públicas No. 
+              <span class="editable-inline" contenteditable="true" data-field="cliente_escritura_rep">963 del 7 de julio de 2022 y 237,849 del 31 de mayo de 2024</span>, las cuales no le han sido revocadas ni modificadas.
+            </li>
+            <li>
+              Que su Registro Federal de Contribuyentes es: <strong class="editable-inline" contenteditable="true" data-field="cliente_rfc">TIC190625NM0 / GEL810115VD6</strong>.
+            </li>
+            <li>
+              Que señala como domicilios autorizados para la operación de los equipos los ubicados en:
+              <ul>
+                <li><strong>Planta 1 Torreón:</strong> <span class="editable-inline" contenteditable="true" data-field="domicilio_p1">Boulevard Carroceras No. 5, Parque Industrial Ferropuerto Laguna, Torreón, Coahuila.</span></li>
+                <li><strong>Planta 2 Torreón:</strong> <span class="editable-inline" contenteditable="true" data-field="domicilio_p2">Boulevard San Pedro s/n, Parque Industrial Ferropuerto Laguna, Torreón, Coahuila.</span></li>
+                <li><strong>Planta Cadereyta:</strong> <span class="editable-inline" contenteditable="true" data-field="domicilio_cadereyta">Calle 20 de Noviembre No. 712 Sur, Cadereyta Jiménez Centro, Cadereyta Jiménez, N.L.</span></li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <div class="declaration-block">
+          <h4>II. Declara EL PRESTADOR / EL ARRENDADOR, por su propio derecho:</h4>
+          <ol type="a">
+            <li>
+              Que es una persona física de nacionalidad mexicana, con plena capacidad jurídica para celebrar el presente contrato.
+            </li>
+            <li>
+              Que se encuentra registrado ante el SAT bajo la clave del RFC <strong class="editable-inline" contenteditable="true" data-field="prov_rfc">MELE820304CU0</strong>, operando bajo el nombre comercial <span class="editable-inline" contenteditable="true" data-field="prov_comercial">"RECREATIVO"</span>.
+            </li>
+            <li>
+              Que su domicilio fiscal se ubica en: <span class="editable-inline" contenteditable="true" data-field="prov_domicilio">Calle Paseo de Pisa No. 79, Col. Residencial Senderos, C.P. 27018, Torreón, Coahuila</span>.
+            </li>
+            <li>
+              Que es propietario legítimo de los equipos arrendados y se encuentra al corriente en sus obligaciones fiscales y de seguridad social.
+            </li>
+            <li>
+              Que señala como datos bancarios para depósito los siguientes:
+              <div class="bank-box">
+                <p><strong>Beneficiario:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_beneficiario">ERNESTO ALBERTO MENDOZA LÓPEZ</span></p>
+                <p><strong>Banco:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_nombre">Banco Nacional de México, S.A. (Banamex)</span> | <strong>Sucursal:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_sucursal">5189</span></p>
+                <p><strong>Número de Cuenta:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_cuenta">7018692744</span> | <strong>CLABE Interbancaria:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_clabe">002060701806927446</span></p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Cláusulas Principales -->
+      <section class="doc-section">
+        <h3 class="section-heading">CLÁUSULAS</h3>
+
+        <div class="clause-item">
+          <h5>PRIMERA. OBJETO DEL CONTRATO</h5>
+          <p>
+            El ARRENDADOR otorga en arrendamiento puro y se obliga a prestar a favor de la ARRENDATARIA los servicios especializados de renta de montacargas y equipos de manejo de materiales (en adelante, los <strong>"EQUIPOS"</strong>) descritos en el Anexo Uno, incluyendo mantenimiento preventivo y correctivo integral, refacciones, llantas, baterías y cargadores.
+          </p>
+        </div>
+
+        <div class="clause-item">
+          <h5>SEGUNDA. ALCANCE DEL PARQUE ARRENDADO</h5>
+          <p>
+            El parque total considerado en este contrato se integra por <strong id="txt-total-equipos-clausula">83</strong> equipos, distribuidos en montacargas, tugger trains, pallet stackers y pallet jacks, de los cuales <span class="editable-inline" contenteditable="true" data-field="equipos_electricos_cant">73</span> operan con energía eléctrica y <span class="editable-inline" contenteditable="true" data-field="equipos_gas_cant">10</span> operan con gas LP, conforme al inventario detallado del Anexo Uno.
+          </p>
+        </div>
+
+        <div class="clause-item">
+          <h5>TERCERA. ENTREGA Y PROHIBICIÓN ABSOLUTA DE TRASLADO</h5>
+          <p>
+            Los EQUIPOS serán operados exclusivamente en las plantas autorizadas del CLIENTE. Queda <strong>estrictamente prohibido a la ARRENDATARIA</strong> trasladar o reubicar los EQUIPOS fuera de dichas instalaciones sin autorización previa y por escrito del ARRENDADOR. Todo gasto de maniobras o fletes por reubicación autorizada será a cargo 100% de la ARRENDATARIA.
+          </p>
+        </div>
+
+        <div class="clause-item highlight-box">
+          <div class="protection-tag">🛡️ BLINDAJE PROVEEDOR</div>
+          <h5>CUARTA. NATURALEZA DE MANTENIMIENTO E IMPEDIMENTO DE ACCESO</h5>
+          <p>
+            Los mantenimientos forman parte integral del arrendamiento. Si por causas imputables al CLIENTE se impide o retrasa la ejecución de mantenimientos programados, el CLIENTE pagará los gastos de traslado en vano del personal técnico y <strong>responderá al 100% por los daños o desgaste mecánico resultante</strong>.
+          </p>
+        </div>
+
+        <div class="clause-item">
+          <h5>QUINTA. CONTRAPRESTACIÓN Y FORMA DE PAGO</h5>
+          <p>
+            La ARRENDATARIA pagará mensualmente al ARRENDADOR la cantidad subtotal de <strong id="txt-subtotal-clausula">$83,647.24 USD</strong> más el 16% de IVA (<strong id="txt-iva-clausula">$13,383.56 USD</strong>), sumando un total mensual de <strong id="txt-total-clausula">$97,030.80 USD</strong>, pagaderos dentro de los <strong>30 días naturales</strong> posteriores a la emisión del CFDI correspondiente.
+          </p>
+        </div>
+
+        <div class="clause-item highlight-box">
+          <div class="protection-tag">🛡️ BLINDAJE PROVEEDOR</div>
+          <h5>SEXTA. INTERESES MORATORIOS Y SUSPENSIÓN POR MORA</h5>
+          <p>
+            En caso de mora se devengará un interés del <strong>2.5% mensual</strong> sobre saldos insolutos. Si el retraso excede de <strong>15 días hábiles</strong>, el ARRENDADOR podrá suspender servicios, bloquear o retirar los EQUIPOS de planta sin responsabilidad legal alguna.
+          </p>
+        </div>
+
+        <div class="clause-item highlight-box">
+          <div class="protection-tag">🛡️ BLINDAJE PROVEEDOR</div>
+          <h5>SÉPTIMA. NIVELES DE SERVICIO: EQUIPOS NUEVOS VS. USADOS</h5>
+          <p>
+            - <strong>Equipos Nuevos:</strong> Tiempos de respuesta de 24 hrs. Aplica nota de crédito por paro prolongado SOLO si la falla deriva de desgaste natural bajo uso adecuado.<br>
+            - <strong>Equipos Usados:</strong> Tiempos de respuesta de 48 hrs. <strong>NO APLICA emisión de notas de crédito ni descuentos por tiempos de inactividad o reparación</strong> en equipos usados.
+          </p>
+        </div>
+
+        <div class="clause-item highlight-box">
+          <div class="protection-tag">🛡️ BLINDAJE PROVEEDOR</div>
+          <h5>OCTAVA. CUIDADO DE BATERÍAS DE LITIO Y CONVENCIONALES</h5>
+          <p>
+            El CLIENTE se obliga a mantener en baterías de litio un <strong>nivel mínimo del 25% de carga</strong>, evitando descargas profundas. Cualquier daño a baterías, celdas o sistema BMS por mala recarga o negligencia será pagado al 100% por el CLIENTE.
+          </p>
+        </div>
+
+        <div class="clause-item highlight-box">
+          <div class="protection-tag">🛡️ BLINDAJE PROVEEDOR</div>
+          <h5>NOVENA. DAÑOS, NEGLIGENCIA Y COBRO CONTINUO DE RENTA</h5>
+          <p>
+            Si un EQUIPO sufre falla o daño por choque, impericia, sobrecarga, negligencia u omisión del CLIENTE: <strong>EL TIEMPO QUE DURE LA REPARACIÓN NO SERÁ TIEMPO DE NO COBRO; LA ARRENDATARIA CONTINUARÁ PAGANDO EL 100% DE LA RENTA MENSUAL</strong> además de cubrir el costo total de refacciones y taller.
+          </p>
+        </div>
+
+        <div class="clause-item highlight-box">
+          <div class="protection-tag">🛡️ BLINDAJE PROVEEDOR</div>
+          <h5>DÉCIMA. SEGURO OBLIGATORIO DE RESPONSABILIDAD CIVIL Y INDEMNIDAD</h5>
+          <p>
+            La ARRENDATARIA está obligada a contratar y mantener Seguro de Responsabilidad Civil Amplia para terceros e instalaciones. De omitirlo, asume directamente toda la responsabilidad y exime al ARRENDADOR de cualquier reclamo civil, laboral o penal.
+          </p>
+        </div>
+
+        <div class="clause-item highlight-box">
+          <div class="protection-tag">🛡️ BLINDAJE PROVEEDOR</div>
+          <h5>DÉCIMA PRIMERA. PENA CONVENCIONAL POR RETENCIÓN ILEGÍTIMA</h5>
+          <p>
+            Si al vencimiento o rescisión del contrato la ARRENDATARIA no devuelve los EQUIPOS en 24 horas, pagará una pena convencional equivalente a <strong>2 (dos) mensualidades de renta</strong> por cada mes o fracción de retraso.
+          </p>
+        </div>
+
+        <div class="clause-item">
+          <h5>DÉCIMA SEGUNDA. VIGENCIA Y JURISDICCIÓN</h5>
+          <p>
+            El contrato tendrá una vigencia obligatoria de <strong>24 meses</strong> a partir del 10 de octubre de 2025. Para cualquier controversia, LAS PARTES se someten a los Tribunales de la Ciudad de <strong>Torreón, Coahuila de Zaragoza</strong>.
+          </p>
+        </div>
+      </section>
+
+      <!-- Signature Section -->
+      <section class="doc-section signatures-section">
+        <h3 class="section-heading">FIRMAS DE CONFORMIDAD</h3>
+        <div class="signatures-grid">
+          <div class="sig-card">
+            <div class="sig-line"></div>
+            <p><strong>TECHTRONIC INDUSTRIES CO. MÉXICO S. DE R.L. DE C.V. / MILWAUKEE</strong></p>
+            <p>Por: <span class="editable-inline" contenteditable="true" data-field="sig_cliente_nombre">José Fernando Kantún Nava / Blanca Alicia Garza Elizondo</span></p>
+            <p class="role">Representante Legal / ARRENDATARIA</p>
+          </div>
+          <div class="sig-card">
+            <div class="sig-line"></div>
+            <p><strong>SR. ERNESTO ALBERTO MENDOZA LÓPEZ</strong></p>
+            <p>Por su propio derecho</p>
+            <p class="role">Persona Física con Actividad Empresarial / ARRENDADOR</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Page Break for Annexes -->
+      <div class="page-break"></div>
+
+      <!-- ANEXO UNO: EDITABLE EQUIPMENT TABLE -->
+      <section class="doc-section annex-section">
+        <div class="annex-header">
+          <h3>ANEXO UNO: RELACIÓN DE EQUIPOS Y PRECIOS UNITARIOS DE RENTA</h3>
+          <p>Tabla dinámica de inventario. Modifique directamente las celdas para actualizar cantidades, modelos, series y tarifas.</p>
+        </div>
+
+        <div class="table-responsive">
+          <table id="tbl-equipos" class="editable-table">
+            <thead>
+              <tr>
+                <th style="width: 40px;">No.</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Número de Serie</th>
+                <th>Categoría</th>
+                <th>Tipo / Descripción</th>
+                <th>Energía</th>
+                <th>Cargador</th>
+                <th>Renta Mensual (USD)</th>
+                <th>Renta Anual (USD)</th>
+                <th class="no-print" style="width: 50px;">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tbl-equipos-body">
+              <!-- Rows inserted dynamically by JS -->
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="8" style="text-align: right; font-weight: bold;">TOTALES DEL PARQUE:</td>
+                <td id="tbl-sum-mensual" class="num-cell">$83,647.24</td>
+                <td id="tbl-sum-anual" class="num-cell">$1,003,766.88</td>
+                <td class="no-print"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- ANEXO DOS: FINANCIAL SUMMARY -->
+      <section class="doc-section annex-section">
+        <div class="annex-header">
+          <h3>ANEXO DOS: CONTRAPRESTACIÓN RESUMIDA Y CUENTAS DE PAGO</h3>
+        </div>
+
+        <div class="financial-summary-grid">
+          <div class="summary-card">
+            <h4>Resumen de Cobro Mensual Estimado</h4>
+            <table class="summary-table">
+              <tr>
+                <td>Subtotal Renta Mensual (USD):</td>
+                <td id="summary-subtotal" class="amount">$83,647.24 USD</td>
+              </tr>
+              <tr>
+                <td>Impuesto al Valor Agregado (16% IVA):</td>
+                <td id="summary-iva" class="amount">$13,383.56 USD</td>
+              </tr>
+              <tr class="total-line">
+                <td><strong>Total Mensual a Pagar (USD):</strong></td>
+                <td id="summary-total" class="amount"><strong>$97,030.80 USD</strong></td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="summary-card bank-details">
+            <h4>Datos Bancarios del Arrendador para Transferencias</h4>
+            <ul>
+              <li><strong>Beneficiario:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_beneficiario">ERNESTO ALBERTO MENDOZA LÓPEZ</span></li>
+              <li><strong>RFC:</strong> <span class="editable-inline" contenteditable="true" data-field="prov_rfc">MELE820304CU0</span></li>
+              <li><strong>Banco:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_nombre">Banco Nacional de México, S.A. (Banamex)</span></li>
+              <li><strong>Sucursal:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_sucursal">5189</span></li>
+              <li><strong>Número de Cuenta:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_cuenta">7018692744</span></li>
+              <li><strong>Cuenta CLABE:</strong> <span class="editable-inline" contenteditable="true" data-field="banco_clabe">002060701806927446</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANEXO TRES: CHECKLIST -->
+      <section class="doc-section annex-section">
+        <div class="annex-header">
+          <h3>ANEXO TRES: ACTA DE ENTREGA / RECEPCIÓN Y INSPECCIÓN FÍSICA</h3>
+        </div>
+
+        <table class="checklist-table">
+          <thead>
+            <tr>
+              <th>Punto de Inspección</th>
+              <th style="width: 150px;">Estado</th>
+              <th>Observaciones Técnicas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Pintura y Carrocería General</td>
+              <td><select class="status-select"><option>Buen Estado</option><option>Nuevo</option><option>Aceptable</option><option>Regular</option></select></td>
+              <td>Sin golpes estructurales</td>
+            </tr>
+            <tr>
+              <td>Llantas (Delanteras y Traseras)</td>
+              <td><select class="status-select"><option>Buen Estado</option><option>Nuevo</option><option>Aceptable</option></select></td>
+              <td>Desgaste dentro de norma</td>
+            </tr>
+            <tr>
+              <td>Batería Eléctrica / Sistema BMS</td>
+              <td><select class="status-select"><option>Buen Estado</option><option>Nuevo</option></select></td>
+              <td>Carga al 100%, celdas sanas</td>
+            </tr>
+            <tr>
+              <td>Cargador de Batería e Inversor</td>
+              <td><select class="status-select"><option>Buen Estado</option><option>Nuevo</option></select></td>
+              <td>Conector y cableado impecable</td>
+            </tr>
+            <tr>
+              <td>Sistema Hidráulico y Horquillas</td>
+              <td><select class="status-select"><option>Buen Estado</option><option>Nuevo</option></select></td>
+              <td>Sin fugas de aceite</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </article>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
