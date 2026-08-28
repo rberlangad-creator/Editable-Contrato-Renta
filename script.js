@@ -277,10 +277,104 @@ function toggleEditMode() {
   }
 }
 
+// User Credentials Registry
+const validCredentials = [
+  { username: "admin", password: "admin" },
+  { username: "milwaukee", password: "contrato2026" },
+  { username: "ernesto", password: "ernesto123" }
+];
+
+// Check Authentication Status
+function checkAuthStatus() {
+  const isAuth = sessionStorage.getItem('contract_auth') === 'true';
+  if (isAuth) {
+    document.body.classList.add('logged-in');
+    document.body.classList.remove('not-logged-in');
+  } else {
+    document.body.classList.add('not-logged-in');
+    document.body.classList.remove('logged-in');
+    // Focus username input
+    setTimeout(() => {
+      const usernameInput = document.getElementById('login-username');
+      if (usernameInput) usernameInput.focus();
+    }, 100);
+  }
+}
+
+// Handle Login Event
+function handleLogin(e) {
+  if (e) e.preventDefault();
+  const usernameInput = document.getElementById('login-username');
+  const passwordInput = document.getElementById('login-password');
+  const errorBox = document.getElementById('login-error');
+
+  const username = usernameInput.value.trim().toLowerCase();
+  const password = passwordInput.value.trim();
+
+  const isValid = validCredentials.some(
+    cred => cred.username.toLowerCase() === username && cred.password === password
+  );
+
+  if (isValid) {
+    sessionStorage.setItem('contract_auth', 'true');
+    errorBox.style.display = 'none';
+    checkAuthStatus();
+  } else {
+    errorBox.style.display = 'flex';
+    passwordInput.value = '';
+    passwordInput.focus();
+    
+    // Re-trigger animation
+    errorBox.style.animation = 'none';
+    errorBox.offsetHeight; // trigger reflow
+    errorBox.style.animation = 'shakeError 0.4s ease';
+  }
+}
+
+// Handle Logout Event
+function handleLogout() {
+  if (confirm('¿Desea cerrar la sesión actual?')) {
+    sessionStorage.removeItem('contract_auth');
+    document.getElementById('login-username').value = '';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-error').style.display = 'none';
+    checkAuthStatus();
+  }
+}
+
 // Initialize Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+  // Setup Authentication State
+  checkAuthStatus();
+
   document.body.classList.add('editing-active');
   renderEquipmentTable(originalEquipmentData);
+
+  // Auth Form Listeners
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', handleLogin);
+  }
+
+  const btnLogout = document.getElementById('btn-logout');
+  if (btnLogout) {
+    btnLogout.addEventListener('click', handleLogout);
+  }
+
+  // Toggle Password Visibility
+  const btnTogglePwd = document.getElementById('btn-toggle-pwd');
+  if (btnTogglePwd) {
+    btnTogglePwd.addEventListener('click', () => {
+      const pwdInput = document.getElementById('login-password');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        btnTogglePwd.innerText = '🙈';
+      } else {
+        pwdInput.type = 'password';
+        btnTogglePwd.innerText = '👁️';
+      }
+    });
+  }
 
   // Toolbar Actions
   document.getElementById('btn-add-equipment').addEventListener('click', addNewEquipmentRow);
@@ -297,3 +391,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.print();
   });
 });
+

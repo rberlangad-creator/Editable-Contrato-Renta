@@ -13,6 +13,49 @@
 </head>
 <body>
 
+  <!-- Login Authentication Overlay -->
+  <div id="login-overlay" class="login-overlay">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-icon">🔐</div>
+        <h2>Acceso al Sistema</h2>
+        <p>Editor & Generador de Contrato de Arrendamiento</p>
+      </div>
+
+      <form id="login-form" autocomplete="off" onsubmit="return false;">
+        <div id="login-error" class="login-error" style="display: none;">
+          ⚠️ Usuario o contraseña incorrectos. Intente de nuevo.
+        </div>
+
+        <div class="form-group">
+          <label for="login-username">Usuario</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input type="text" id="login-username" placeholder="Ej. admin" required autofocus autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Contraseña</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔑</span>
+            <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+            <button type="button" id="btn-toggle-pwd" class="btn-toggle-pwd" title="Mostrar/ocultar contraseña">👁️</button>
+          </div>
+        </div>
+
+        <div class="login-hint">
+          <span>💡 <strong>Credenciales por defecto:</strong></span>
+          <code>admin</code> / <code>admin</code> &nbsp;|&nbsp; <code>milwaukee</code> / <code>contrato2026</code>
+        </div>
+
+        <button type="submit" id="btn-login" class="btn btn-primary btn-block">
+          <span>🔓</span> Iniciar Sesión
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- Top Fixed Action Bar (Hidden on Print) -->
   <header class="app-toolbar no-print">
     <div class="toolbar-brand">
@@ -50,6 +93,9 @@
       </button>
       <button id="btn-print-pdf" class="btn btn-primary">
         <span>📄</span> Descargar en PDF
+      </button>
+      <button id="btn-logout" class="btn btn-outline btn-logout" title="Cerrar sesión de usuario">
+        <span>🔒</span> Salir
       </button>
     </div>
   </header>
